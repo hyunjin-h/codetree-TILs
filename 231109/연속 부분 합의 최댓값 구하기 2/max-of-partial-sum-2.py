@@ -2,12 +2,13 @@
 n=int(input())
 arr=list(map(int,input().split()))
 
-#sum_a가 0보다 작아지면 다음원소부터 다시 구간 만들기
-ans=0
-sum_a=0
-for a in arr:
-    sum_a+=a
-    ans=max(ans,sum_a)
-    if sum_a<0:
-        sum_a=0
-print(ans)
+# max slice sum
+def solution(A):
+    max_ending = 0
+    max_slice = A[0]
+    for a in A:
+        max_ending = max(a, max_ending + a)
+        max_slice = max(max_slice, max_ending)
+    return max_slice
+
+print(solution(arr))
