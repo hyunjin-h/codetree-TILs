@@ -5,6 +5,7 @@ for _ in range(n):
     w,v=map(int,input().split())
     arr.append([v/w,w,v])
 
+#큰가치를 가진 보석으로 정렬
 arr=sorted(arr, reverse=True)
 bag=m
 ans=0
