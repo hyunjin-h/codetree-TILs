@@ -11,4 +11,4 @@ for i in range(len(nums)-1):
         else:
             nums[i],nums[i+1]=nums[i+1],nums[i]
 
-print(int(''.join(nums)))
+print(''.join(nums))
