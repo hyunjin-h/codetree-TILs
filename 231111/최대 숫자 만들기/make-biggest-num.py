@@ -1,12 +1,12 @@
-from functools import cmp_to_key
-
 n=int(input())
 nums=[input() for _ in range(n)]
 
-def compare(x, y):
-    if x == y: return 0 # 같다면 상관 없다
-    if x + y > y + x: return -1
-    else: return 1
-
-nums = sorted(nums, key=cmp_to_key(compare))
+nums.sort()
+for i in range(len(nums)-1):
+    if nums[i][0]==nums[i+1][0]:
+        x=nums[i]+nums[i+1]
+        y=nums[i+1]+nums[i]
+        if int(x)>int(y):
+            nums[i],nums[i+1]=nums[i+1],nums[i]
+nums.reverse()
 print(''.join(nums))
