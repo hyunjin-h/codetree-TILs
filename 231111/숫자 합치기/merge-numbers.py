@@ -1,13 +1,14 @@
+import heapq
 n=int(input())
-nums=list(map(int,input().split()))
+arr=list(map(int,input().split()))
 
-arr=nums
+heapq.heapify(arr)
 answer=0
 while len(arr)>1:
-    arr.sort()
-    pay=arr[0]+arr[1]
-    answer+=pay
-    arr=arr[2:]
-    arr.append(pay)
+    x = heapq.heappop(arr)
+    y = heapq.heappop(arr)
+    heapq.heappush(arr,x+y)
+    answer += x+y
+
 
 print(answer)
