@@ -8,13 +8,20 @@ for _ in range(n):
 
 acards.sort()
 bcards.sort()
-ans=0
-for i in range(n):
-    if acards[i]<bcards[i]:
-        if i!=n-1:
-            acards[i],acards[i+1]=acards[i+1],acards[i]
-    
-    if acards[i]>bcards[i]:
-        ans+=1
+cnt=0
+check_B = 0
 
-print(ans)
+for i in range(n):
+    if check_B == i:
+        if acards[i] > bcards[i]:
+            cnt += 1
+            check_B = i+1
+        else:
+            check_B = i
+
+    else:
+        if acards[i] > bcards[check_B]:
+            cnt += 1
+            check_B += 1
+
+print(cnt)
