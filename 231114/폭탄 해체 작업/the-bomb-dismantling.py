@@ -1,13 +1,24 @@
+import heapq
 n=int(input())
 end_time=0
-bomb=[]
+now_time=0
+bombs=[]
 for _ in range(n):
     score,time= map(int,input().split()) 
     end_time=max(end_time,time)
-    bomb.append([score,time])
+    bombs.append([score,time])
+bombs=sorted(bombs,key=lambda x : (x[1],-x[0]))
 
-score_board=[0]*(end_time+1)
-for i in range(n): 
-    score_board[bomb[i][1]]=max(score_board[bomb[i][1]],bomb[i][0])
 
+
+score_board = []
+for bomb in bombs:
+    score,time = bomb
+    if len(score_board) < time:
+        heapq.heappush(score_board,score)
+    else:
+        before=heapq.heappop(score_board)
+        heapq.heappush(score_board,max(score,before))
+
+        
 print(sum(score_board))
