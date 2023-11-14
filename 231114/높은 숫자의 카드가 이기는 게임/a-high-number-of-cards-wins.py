@@ -1,27 +1,23 @@
-n=int(input())
-acards=[a for a in range(1,2*n+1)]
-bcards=[]
-for _ in range(n):
-    card=int(input())
-    acards.remove(card)
-    bcards.append(card)
+import sys
+input = sys.stdin.readline
 
-acards.sort()
-bcards.sort()
-cnt=0
-check_B = 0
+n = int(input())
 
-for i in range(n):
-    if check_B == i:
-        if acards[i] > bcards[i]:
-            cnt += 1
-            check_B = i+1
+arr = [int(input()) for _ in range(n)] + [2 * n + 1]
+arr.sort()
+
+ans = 0
+prev = 1
+
+for i in range(1, n + 1):
+    if arr[i - 1] + 1 != arr[i] :
+        if arr[i] - arr[i - 1] - 1 > prev:
+            ans += prev
+            prev = 1
         else:
-            check_B = i
-
+            ans += arr[i] - arr[i - 1] - 1 
+            prev -= arr[i] - arr[i - 1] - 2
     else:
-        if acards[i] > bcards[check_B]:
-            cnt += 1
-            check_B += 1
+        prev += 1
 
-print(cnt)
+print(ans)
