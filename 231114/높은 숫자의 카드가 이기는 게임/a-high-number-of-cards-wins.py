@@ -1,23 +1,33 @@
-import sys
-input = sys.stdin.readline
-
+# 변수 선언 및 입력:
 n = int(input())
+a_cards = []
+b_cards = [
+    int(input())
+    for _ in range(n)
+]
+# b 카드 숫자로 이루어진 hashset을 완성해줍니다.
+b_set = set(b_cards)
 
-arr = [int(input()) for _ in range(n)] + [2 * n + 1]
-arr.sort()
+# a 카드를 완성해줍니다.
+a_cards = [
+    num
+    for num in range(1, 2 * n + 1)
+    if num not in b_set
+]
 
+# a, b 카드 목록을 전부 오름차순으로 정렬해줍니다.
+a_cards.sort()
+b_cards.sort()
+
+# a의 카드를 작은 숫자부터 보며
+# b카드의 앞에서부터 이길 수 있는 순간에 둘을 매칭하는게 최선임을 이용합니다.
 ans = 0
-prev = 1
-
-for i in range(1, n + 1):
-    if arr[i - 1] + 1 != arr[i] :
-        if arr[i] - arr[i - 1] - 1 > prev:
-            ans += prev
-            prev = 1
-        else:
-            ans += arr[i] - arr[i - 1] - 1 
-            prev -= arr[i] - arr[i - 1] - 2
-    else:
-        prev += 1
+b_idx = 0
+for a_idx in range(n):
+    # a가 현재 b 카드보다 우세하다면
+    # 둘을 매칭해주는게 항상 유리합니다.
+    if b_idx < n and a_cards[a_idx] > b_cards[b_idx]:
+        ans += 1
+        b_idx += 1
 
 print(ans)
