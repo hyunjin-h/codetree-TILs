@@ -1,7 +1,7 @@
 n=int(input())
 arr=[list(map(int,input().split())) for _ in range(n)]
 
-arr=sorted(arr)
+arr=sorted(arr,key=lambda x:x[1])
 cnt=0
 cur_end=-1
 for a,b in arr:
