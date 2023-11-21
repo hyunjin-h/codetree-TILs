@@ -1,29 +1,50 @@
-n=int(input())
-arr=[list(map(int,input().split())) for _ in range(n)]
+import sys
+sys.setrecursionlimit(10 ** 6)
 
-case1_dx=[-2,-1,1,2]
-case1_dy=[0,0,0,0]
-case2_dx=[-1,0,1,0]
-case2_dy=[0,1,0,-1]
-case3_dx=[-1,-1,1,1]
-case3_dy=[-1,1,-1,1]
+def cnt_bomb():
+    loc = []
+    for i in range(bomb_cnt):
+        if bomb[i] == 1:
+            y = bomb_loc[i][1]
+            for x in range(-2, 3):
+                if 0 <= bomb_loc[i][0] + x < n:
+                  if (bomb_loc[i][0] + x, y) not in loc:
+                      loc.append((bomb_loc[i][0] + x, y))
+        elif bomb[i] == 2:
+            for dx, dy in (0, 0), (0, 1), (0, -1), (1, 0), (-1, 0):
+                if 0 <= bomb_loc[i][0] + dx < n and 0 <= bomb_loc[i][1] + dy < n:
+                    if (bomb_loc[i][0] + dx, bomb_loc[i][1] + dy) not in loc:
+                        loc.append((bomb_loc[i][0] + dx, bomb_loc[i][1] + dy))
+        else:
+            for dx, dy in (0, 0), (1, 1), (1, -1), (-1, -1), (-1, 1):
+                if 0 <= bomb_loc[i][0] + dx < n and 0 <= bomb_loc[i][1] + dy < n:
+                    if (bomb_loc[i][0] + dx, bomb_loc[i][1] + dy) not in loc:
+                        loc.append((bomb_loc[i][0] + dx, bomb_loc[i][1] + dy))
 
-def is_available(x,y):
-    if x>=0 and x<n and y>=0 and y<n and arr[x][y]==0:
-        return True
-    return False
+    return len(loc)
 
-def bomb(x,y):
-    
-    
+def is_most(now, most_bomb):
+    if now == bomb_cnt:
+        cnt = cnt_bomb()
+        if most_bomb < cnt:
+            most_bomb = cnt
+        return most_bomb
+    for i in range(1, 4):
+        bomb.append(i)
+        most_bomb = is_most(now + 1, most_bomb)
+        bomb.pop()
+    return most_bomb
 
-cnt=0
+n = int(input())
+grid = [list(map(int, input().split())) for _ in range(n)]
+bomb_cnt = 0
+bomb_loc = []
+bomb = []
+
 for i in range(n):
     for j in range(n):
-        if arr[i][j]==1:
-            cnt+=1
-            bomb(i,j)
+        if grid[i][j] == 1:
+            bomb_cnt += 1
+            bomb_loc.append((i, j))
 
-
-answer=sum(arr)-cnt
-print(answer)
+print(is_most(0, 0))
