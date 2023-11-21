@@ -18,8 +18,7 @@ def check():
             
             cnt=0
         else:
-            print(cnt)
-            print(pre)
+
             return 0
     result+=1
 
