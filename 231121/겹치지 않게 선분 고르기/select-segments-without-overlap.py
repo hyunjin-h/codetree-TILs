@@ -5,7 +5,7 @@ arr=sorted(arr)
 cnt=0
 cur_end=-1
 for a,b in arr:
-    if a>=cur_end:
+    if a>cur_end:
         cur_end=b
         cnt+=1
     
