@@ -1,41 +1,29 @@
-n=int(input())
-answer=[]
-result=0
-def check():
-    global result
-    pre=answer[0]
-    cnt=1
-    if n==1:
-        result=1
-        return 0
-    for i in range(1,n):
-        if pre==answer[i]:
-            cnt+=1
-        else:
-            cnt=1
-            if i==n-1:
-                return 0         
-        if cnt%pre==0:
-            cnt=0
-        else:
-            return 0
-        pre=answer[i]
-    result+=1
+n = int(input())
+ans = 0
+num = []
 
+def isBeautifulNum(num):
+    i = 0
+    while i < n:
+        for j in range(i, i + num[i]):
+            if j >= n or num[j] != num[i]:
+                return False
+        i += num[i]
+    return True
 
+def makeNum(cur):
+    global num
+    global ans
 
-def make(curr_num):
-    if curr_num==n:
-        check()
-        return 0
-    for i in range(1,5):
-        answer.append(i)
-        make(curr_num+1)
-        answer.pop()
-
-
+    if cur > n:
+        if isBeautifulNum(num):
+            ans += 1
+        return
     
-    
-    
-make(0)
-print(result)
+    for i in range(1, 5):
+        num.append(i)
+        makeNum(cur + 1)
+        num.pop()
+
+makeNum(1)
+print(ans)
