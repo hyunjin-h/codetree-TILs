@@ -15,3 +15,4 @@ def answer():
     else:
         print('No')
         return 0
+answer()
