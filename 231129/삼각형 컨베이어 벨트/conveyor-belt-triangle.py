@@ -12,5 +12,5 @@ for i in range(t):
 
 for i in range(len(belt)):
     print(belt[i],end=' ')
-    if i%3==n-1:
+    if i%n==n-1:
         print()
