@@ -15,7 +15,7 @@ def push_(chance):
             chance-=1
         if chance==0:
             return
-    for i in range(n-1,-1,-1):
+    for i in range(n-1,0,-1):
         words[i]=list(words[i])
         words[i].insert(0,'_')
         words[i]=''.join(words[i])
