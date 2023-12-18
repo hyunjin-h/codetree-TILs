@@ -23,8 +23,9 @@ for i in range(1, n):
 # 최종 blank 처리
 j = len(blanks) - 1
 while mod != 0:
-    blanks[j] += 1
-    mod -= 1
+    if blanks[j]<max(blanks):
+        blanks[j] += 1
+        mod -= 1
     j -= 1
 
 res = ''
