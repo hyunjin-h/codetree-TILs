@@ -21,12 +21,19 @@ for i in range(1, n):
         mod -= 1
 
 # 최종 blank 처리
-j = len(blanks) - 1
-while mod != 0:
-    if blanks[j]<max(blanks):
+if max(blanks)-min(blanks)<1:
+    j = len(blanks) - 1
+    while mod != 0:
         blanks[j] += 1
         mod -= 1
-    j -= 1
+        j -= 1
+else:
+    j = len(blanks) - 1
+    while mod != 0:
+        if blanks[j]<max(blanks):
+            blanks[j] += 1
+            mod -= 1
+        j -= 1
 
 res = ''
 for i in range(n):
