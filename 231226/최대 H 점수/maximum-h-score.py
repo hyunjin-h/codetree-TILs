@@ -9,6 +9,8 @@ for i, a in enumerate(arr):
     if len(arr)-i>=a:
         h=max(h,a)
         hi=i
+    if h==a:
+        hi=i
 
 while l>0 and hi>=0:
     arr[hi]+=1
