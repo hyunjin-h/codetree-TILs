@@ -10,7 +10,7 @@ for i, a in enumerate(arr):
         h=max(h,a)
         hi=i
 
-while l>0 and hi>0:
+while l>0 and hi>=0:
     arr[hi]+=1
     if len(arr)-hi>=arr[hi]:
         h=arr[hi]
