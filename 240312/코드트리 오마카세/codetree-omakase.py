@@ -23,7 +23,7 @@ for i in range(len(orders)):
             belt[x][name]=1
         else: 
             belt[x][name]+=1
-        
+
     
     if order=='200': # 손님 입장
         # 이름이 name인 사람이 시각 t에 위치 x에 있는 의자
@@ -33,14 +33,17 @@ for i in range(len(orders)):
         n=int(orders[i][4])
         man[x][0]=name
         man[x][1]=n
+
+        
+    
+
     for j in range(l):
-        if len(belt[j])>0 and man[j][1]>0 and man[j][0] in belt[j]:
-            belt[j][man[j][0]]-=1
-            if belt[j][man[j][0]]==0:
+            if len(belt[j])>0 and man[j][1]>0 and man[j][0] in belt[j]:
+                man[j][1]-=belt[j][man[j][0]]
+                belt[j][man[j][0]]=0
                 del belt[j][man[j][0]]
-            man[j][1]-=1
-            if man[j][1]==0:
-                man[j][0]=''
+                if man[j][1]<=0:
+                    man[j][0]=''
         
 
     if order=='300':# 사진 촬영
